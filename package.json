@@ -1,0 +1,15 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --minify --target=chrome58,edge16 --outdir=dist",
+    "watch": "esbuild src/index.ts --bundle --watch --target=chrome58,edge16 --outdir=dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.12.15"
+  }
+}
