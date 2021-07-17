@@ -1,14 +1,18 @@
 import {MinoType, MinoShapes, checkBlockPosition} from '../src/blocks.ts';
 describe('Check block position', () => {
-    const board = new Array(20);
-    for(let i = 0; i < 10; i++){
-        board[i] = new Array(10).fill(0);
-    }
+    let board: number[][];
+    let x: number = 0, y: number = 0;
+    let block: number[][];
+    beforeEach(() => {
+        board = new Array(20);
+        for(let i = 0; i < 20; i++){
+            board[i] = new Array(10).fill(0);
+        }
+        x = 0;
+        y = 0;
+        block = MinoShapes[MinoType.O];
+    });
 
-    let x = 0;
-    let y = 0;
-
-    const block = MinoShapes[MinoType.O];
 
     it('Block can go over 0, 0', () => {
         const result = checkBlockPosition(board, x, y, block);
@@ -33,4 +37,16 @@ describe('Check block position', () => {
         const result = checkBlockPosition(board, x, y, block);
         expect(result).toEqual(false);
     });
+
+    it('Return false if collides', () => {
+        board[5][3] = 1;
+        x = 2;
+        y = 5;
+        const result = checkBlockPosition(board, x, y, block);
+        expect(result).toEqual(false);
+    });
+
+    
+
+
 });

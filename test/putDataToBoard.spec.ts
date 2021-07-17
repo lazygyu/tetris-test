@@ -41,6 +41,8 @@ describe('PutDataToBoard', () => {
 
         board[18][8] = 0;
         board[18][9] = 4;
+        board[19][8] = 0;
+        board[19][9] = 4;
 
         expect(result).toEqual(board);
     });

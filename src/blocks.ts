@@ -89,7 +89,7 @@ export function checkBlockPosition(board: number[][], x: number, y: number, mino
                     return false;
                 }
                 const t = board[y + i][x + j] + mino[i][j];
-                if (isNaN(t)){
+                if (isNaN(t) || t > mino[i][j]){
                     return false;
                 }
             }
