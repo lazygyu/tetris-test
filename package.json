@@ -5,11 +5,17 @@
   "main": "index.js",
   "scripts": {
     "build": "esbuild src/index.ts --bundle --minify --target=chrome58,edge16 --outdir=dist",
-    "watch": "esbuild src/index.ts --bundle --watch --target=chrome58,edge16 --outdir=dist"
+    "watch": "esbuild src/index.ts --bundle --watch --target=chrome58,edge16 --outdir=dist",
+    "serve": "esbuild src/index.ts --servedir=. --outdir=dist --bundle --sourcemap",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "esbuild": "^0.12.15"
+    "@types/jest": "^26.0.24",
+    "esbuild": "^0.12.15",
+    "esbuild-jest": "^0.5.0",
+    "jest": "^27.0.6"
   }
 }

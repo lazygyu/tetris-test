@@ -1,7 +1,7 @@
 export enum MinoType {
     I = 1,
-    L = 2,
-    J = 3,
+    J = 2,
+    L = 3,
     O = 4,
     S = 5,
     T = 6,
@@ -17,15 +17,15 @@ export const MinoShapes: {[key in MinoType]: number[][]} = {
         [0, 0, 0, 0, 0],
     ],
 
-    [MinoType.L]: [
-        [2, 0, 0],
-        [2, 2, 2],
+    [MinoType.J]: [
+        [3, 0, 0],
+        [3, 3, 3],
         [0, 0, 0],
     ],
 
-    [MinoType.J]: [
-        [0, 0, 3],
-        [3, 3, 3],
+    [MinoType.L]: [
+        [0, 0, 2],
+        [2, 2, 2],
         [0, 0, 0],
     ],
 
@@ -53,3 +53,14 @@ export const MinoShapes: {[key in MinoType]: number[][]} = {
         [0, 0, 0],
     ],
 }
+
+export enum RotateDirection {
+    Clockwise = 0,
+    CounterClockwise = 1,
+}
+
+export function rotate(mino: number[][], direction: RotateDirection = RotateDirection.Clockwise): number[][] {
+    let result = mino;
+    return result;
+}
+
