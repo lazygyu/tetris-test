@@ -46,7 +46,4 @@ describe('Check block position', () => {
         expect(result).toEqual(false);
     });
 
-    
-
-
 });

@@ -121,3 +121,8 @@ export function putDataToBoard(board: number[][], x: number, y: number, mino: nu
     }
     return result;
 }
+
+export function eraseFilledLines(board: number[][]): number[][] {
+    const result: number[][] = [];
+    return result;
+}
