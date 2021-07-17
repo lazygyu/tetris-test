@@ -1,5 +1,5 @@
 import {BlockSize, CanvasHeight, CanvasWidth, Colors} from './constants';
-import {MinoType, MinoShapes, checkBlockPosition, rotate, putDataToBoard} from './blocks';
+import {MinoType, MinoShapes, checkBlockPosition, rotate, putDataToBoard, eraseFilledLines, getNextMino} from './blocks';
 
 export class Tetris {
     private _board: number[][];
@@ -11,6 +11,7 @@ export class Tetris {
     private _currentMino: MinoType = MinoType.T;
     private _currentMinoData: number[][] = MinoShapes[MinoType.T];
 
+    private _blockCount = 0;
 
     constructor() {
         this._board = new Array(20);
@@ -33,6 +34,9 @@ export class Tetris {
                 case 'ArrowDown':
                     this._moveDown();
                     break;
+                case 'Space':
+                    this._hardDrop();
+                    break;
                 case 'ArrowUp':
                     const nextBlock = rotate(this._currentMinoData);
                     if (checkBlockPosition(this._board, this._x, this._y, nextBlock)) {
@@ -45,6 +49,13 @@ export class Tetris {
 
     public update(): void {
         this._elapsed += 0.010;
+
+        const span = (Math.max(1 - (this._blockCount/100), 0.05));
+
+        if (this._elapsed > span) {
+            this._elapsed -= span;
+            this._moveDown();
+        }
     }
 
     public render(ctx: CanvasRenderingContext2D): void {
@@ -88,11 +99,23 @@ export class Tetris {
         ctx.fillRect(x * BlockSize, y * BlockSize, BlockSize, BlockSize);
     }
 
+    private _hardDrop() {
+        while (checkBlockPosition(this._board, this._x, this._y + 1, this._currentMinoData)) {
+            this._y++;
+        }
+        this._moveDown();
+    }
+
     private _moveDown() {
         if (checkBlockPosition(this._board, this._x, this._y + 1, this._currentMinoData)) {
             this._y++;
         } else {
             this._board = putDataToBoard(this._board, this._x, this._y, this._currentMinoData);
+            this._board = eraseFilledLines(this._board);
+            this._currentMino = getNextMino();
+            this._currentMinoData = MinoShapes[this._currentMino];
+            this._blockCount++;
+
             this._y = 0;
             this._x = 3;
         }

@@ -122,7 +122,39 @@ export function putDataToBoard(board: number[][], x: number, y: number, mino: nu
     return result;
 }
 
-export function eraseFilledLines(board: number[][]): number[][] {
+function deepCopy(arr: number[][]): number[][] {
     const result: number[][] = [];
+    for(let i = 0; i < arr.length; i++) {
+        result[i] = [];
+        for (let j = 0; j < arr[i].length; j++) {
+            result[i][j] = arr[i][j];
+        }
+    }
     return result;
+}
+
+export function eraseFilledLines(board: number[][]): number[][] {
+    let result = deepCopy(board);
+    for (let i = 0; i < board.length; i++) {
+        if (result[i].every(v => v > 0)) {
+            result = clampLine(result, i);
+        }
+    }
+    return result;
+}
+
+function clampLine(board: number[][], line: number): number[][] {
+    let result = deepCopy(board);
+    result.splice(line, 1);
+    result.unshift(new Array(board[0].length).fill(0));
+    return result;
+}
+
+const bag: MinoType[] = [];
+
+export function getNextMino(): MinoType {
+    if (bag.length === 0) {
+        bag.push(...([1, 2, 3, 4, 5, 6, 7].sort(() => Math.floor(Math.random() * 3) - 1)));
+    }
+    return bag.pop();
 }
