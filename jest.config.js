@@ -1,5 +1,5 @@
 module.exports = {
-    testEnviroment: 'node',
+    testEnvironment: 'node',
     roots: ['./test/'],
     transform: {
         '\\.ts$': 'esbuild-jest'

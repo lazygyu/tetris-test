@@ -14,8 +14,8 @@ class Game {
 
     constructor(wrapper: HTMLElement) {
         this._canvas = document.createElement('canvas');
-        this._canvas.width = CanvasWidth;
-        this._canvas.height = CanvasHeight;
+        this._canvas.width = CanvasWidth * 2;
+        this._canvas.height = CanvasHeight * 2;
 
         this.loop = this._loop.bind(this);
 
@@ -57,9 +57,11 @@ class Game {
         const ctx = this._canvas.getContext('2d');
         ctx.save();
         ctx.translate(0.5, 0.5); // canvas 는 가상 좌표계라서 0.5 씩 밀어줘야 픽셀과 1:1 대응이 됨
+        ctx.scale(2, 2);
         this._gamelogic.render(ctx);
         ctx.restore();
     }
 }
 
 const game = new Game(document.querySelector('#game'));
+
