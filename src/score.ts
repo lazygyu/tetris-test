@@ -89,7 +89,7 @@ export class Score {
             scoreObject.actionName = EraseNames[line];
         }
 
-        const score = ((line * line) + this._combo) * (this._backToBack + 1);
+        const score = ((line * line) + this._combo) * (this._backToBack + 1) * (scoreObject.tspin ? 2 : 1);
         scoreObject.score = score;
 
         this._erased += line;
